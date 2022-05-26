@@ -86,3 +86,161 @@ func subStringOfGivenString(index: Int, inputString: String) -> String? {
 
 print(subStringOfGivenString(index: 20, inputString: "I believe that people are really good at heart") ?? "nil")
 
+var array = ["Alex", "Matt", "Jillian", "Tom","Matt", "Jane", "Alex","Matt"]
+// Display the output with the element that has highest occurence
+func findHighestOccurence(_ arr: [String]) {
+  var sum = 1
+  var dict = [[String: Any]]()
+  for i in 0..<arr.count {
+     let firstVal = arr[i]
+     sum = 1
+     for j in i+1..<arr.count {
+         let nextVal = arr[j]
+         print("second...\(arr[j])")
+         if firstVal == nextVal {
+             print("Matched.. \(firstVal), \(nextVal)")
+             sum += 1
+             print("sum.. \(sum)")
+          }
+          if j == arr.count-1 {
+              if sum == 0 {
+                  sum = 1
+              }
+              let keyExists = dict.first(where: { $0[firstVal] as! String == firstVal})
+
+              if keyExists == nil {
+                  dict.append([firstVal: sum])
+              }
+              print(dict)
+          }
+     }
+  }
+    print(dict)
+}
+findHighestOccurence(array)
+
+/*Find maxium consecutive ones */
+func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+    var sum = 0
+    var max  = 0
+    for item in nums {
+        if item == 1 {
+            sum += 1
+            if sum > max {
+                max = sum
+            }
+        } else {
+            sum = 0
+        }
+    }
+    return max
+}
+print(findMaxConsecutiveOnes([0,1,3,1,1,1,0,1,1,1,1,0]))
+
+/*Find even number of digits*/
+func findEvenDigits(_ nums:[Int]) -> Int {
+    var sum = 0
+    for item in nums {
+        if isEvenCount(num: item) {
+            sum += 1
+        }
+    }
+    return sum
+}
+
+func isEvenCount(num: Int) -> Bool {
+    var count = 0
+    var temp = 0
+    while (temp != 0) {
+        count += 1
+        temp /= 10
+    }
+    return count % 2 == 0
+}
+
+print(findEvenDigits([12, 345, 2, 6, 7896]))
+
+/*Sort Array*/
+func sortArray(_ sortedArray: inout [Int]) -> [Int] {
+    var temp = 0
+    for i in 0..<sortedArray.count {
+        for j in i+1..<sortedArray.count {
+            if sortedArray[i] > sortedArray[j] {
+                temp = sortedArray[i]
+                sortedArray.swapAt(i, j)
+                sortedArray.remove(at: j)
+                sortedArray.insert(temp, at: j)
+            }
+        }
+    }
+    return sortedArray
+}
+
+var arr = [3,8,10,1,20,2,4]
+print(sortArray(&arr))
+
+/* Sort with Swift sort method*/
+var string = ["An", "Array", "Hello", "Is", "Oh", "This", "Unsorted", "World"]
+let sortedByLength = string.sorted(by: {lhs, rhs in
+    return lhs.count > rhs.count
+})
+//let sortedByLength = string.sorted()
+print(sortedByLength)
+
+/* Sort Array*/
+var sortedArray = [0,1,2,3,5,6,8,9].sorted(by: {$0 < $1})
+print(sortedArray)
+
+/* Reverse Array*/
+func reverseArray(_ arr: inout [Int]) -> [Int] {
+    let count = arr.count
+    for i in 0..<count/2 {
+        (arr[i], arr[count - i - 1]) = (arr[count - i - 1], arr[i])
+    }
+    return arr
+}
+print(reverseArray(&arr))
+
+/* First Non repeating character in string */
+func nonRepeatingChar(repeatingString: String) -> String {
+    let characters = repeatingString.map{String($0)}
+    var counts: [String: Int] = [:]
+    for char in characters {
+        counts[char] = (counts[char] ?? 0) + 1
+    }
+    let nonRepeatingCharacers = characters.filter({counts[$0] == 1})
+    return nonRepeatingCharacers.first ?? ""
+}
+print(nonRepeatingChar(repeatingString: "SimpleSam"))
+
+/* Array of tuples */
+func arrayOfTuples(_ arr: inout [Int]) {
+    var arrayOfTuples = [(Int, Int)]()
+    for (index, element) in arr.enumerated() {
+        arrayOfTuples += [(index, element)]
+    }
+}
+
+var list = [Int](1...5)
+print(arrayOfTuples(&list))
+
+/* Get second largest number in array */
+func secondLargestNumber(arr: [Int]) -> Int {
+    var largest = 0
+    var secondLargest = 0
+    for index in 0..<arr.count {
+        let val = arr[index]
+        if val > largest {
+            secondLargest = largest
+            largest = val
+        } else if val > secondLargest, val != largest {
+            secondLargest = val
+        }
+        
+        if secondLargest == 0 {
+            print("Invalid input")
+        }
+    }
+    return secondLargest
+}
+print(secondLargestNumber(arr: [10,1,2,5,7]))
