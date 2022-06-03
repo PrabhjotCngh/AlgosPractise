@@ -1,4 +1,96 @@
 import UIKit
+import Foundation
+
+/*
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
+
+[-2,1,-3,4,-1,2,1,-5,4]
+[-2,1,-2,4,3,5,6,1,5]
+
+max(4-1, -1)
+
+*/
+
+func sumOfLargestObjectsInArray(arr: [Int]) -> Int {
+    var maxSoFar = Int.min
+    var sum = 0
+    
+    for num in arr {
+      sum = max(num, num+sum)
+      maxSoFar = max(maxSoFar, sum)
+    }
+
+    return maxSoFar
+}
+
+print(sumOfLargestObjectsInArray(arr: [-2,1,-3,4,-1,2,1,-5,4]))
+
+func countTopicOccurrences(topics: [String: [String]], reviews: [String]) -> [String: Int] {
+    // TODO: COMPLETE ME
+    var topicOccurrences = [String: Int]()
+    var totalOccurrences = 0
+    for (key, value) in topics {
+        for keywordsItem in value {
+            totalOccurrences = 0
+            for reviewsItem in reviews {
+                if reviewsItem.contains(keywordsItem) || reviewsItem.contains(keywordsItem.capitalized) {
+                   totalOccurrences += 1
+                }
+            }
+        }
+        if reviews.contains(key) || reviews.contains(key.capitalized) {
+            totalOccurrences += 1
+        }
+        topicOccurrences[key] = totalOccurrences
+    }
+    return topicOccurrences
+}
+
+let topics = ["Price": ["cheap", "expensive", "price"], "Bussiness specialist" : ["gnome", "gnomes"],
+              "Harry Shrub" : ["harry shrub"]]
+let reviews = ["Harry shrub did a great job with my garden, but I expected more gnomes for the price", "I love my new gnomes, they are so cute! My dog loves them too! Thanks Harry!", "Very expensive at fifty dollars per gnome. Next time I will from Cheap Gnomes Warehouse"]
+
+print(countTopicOccurrences(topics: topics, reviews: reviews))
+
+struct Meal {
+    let name: String
+    let ingredients: [String]
+}
+
+func getUniqueMealCount(meals: [Meal]) -> Int {
+     guard meals.count > 0 else {
+         return 0
+     }
+    
+    var totalUniqueMeals = 0
+    var arrayOfMealsDict = [[String: String]]()
+    for items in meals {
+        let sortedIngredients = items.ingredients.sorted{$0 < $1}.joined(separator: ",")
+        arrayOfMealsDict.append([sortedIngredients: items.name])
+    }
+    
+    print(arrayOfMealsDict.compactMap { $0.keys != $0.keys})
+
+    for items in arrayOfMealsDict {
+        for (key, value) in items {
+            totalUniqueMeals += 1
+        }
+    }
+    
+    print(arrayOfMealsDict)
+    
+    return totalUniqueMeals
+}
+
+let meal1 = Meal(name: "American", ingredients: ["lettuce", "cheese", "olives", "tomato"])
+let meal2 = Meal(name: "Mexican", ingredients: ["lettuce", "cheese", "pepper", "tomato"])
+let meal3 = Meal(name: "French", ingredients: ["lettuce", "cheese", "pepper", "tomato"] )
+let meal4 = Meal(name: "Continental", ingredients: ["lettuce", "cheese", "olives", "tomato"])
+let mealsArray = [meal1, meal2, meal3, meal4]
+
+getUniqueMealCount(meals: mealsArray)
 
 /*
  Write a function:
@@ -119,7 +211,7 @@ func findHighestOccurence(_ arr: [String]) {
 }
 findHighestOccurence(array)
 
-/*Find maxium consecutive ones */
+/*Find maximum consecutive ones */
 func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
     var sum = 0
     var max  = 0
