@@ -1,5 +1,20 @@
 import UIKit
-import Foundation
+
+/*Print count of each character in string */
+func printCountOFEachCharacter(str: String) -> [Character: Int] {
+    var dict = [Character: Int]()
+    for i in str {
+        if dict[i] == nil {
+            dict[i] = 1
+        } else {
+            let obj = dict[i]
+            dict[i]! = (obj ?? 0) + 1
+        }
+    }
+    return dict
+}
+let testString = "ababbbbsdfjhjggkfjgkfjgkf"
+print(printCountOFEachCharacter(str: testString))
 
 /*
 Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
@@ -9,11 +24,11 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 [-2,1,-3,4,-1,2,1,-5,4]
 [-2,1,-2,4,3,5,6,1,5]
 
-max(4-1, -1)
+max(-2+1, 1)
 
 */
 
-func sumOfLargestObjectsInArray(arr: [Int]) -> Int {
+func largestSumInArray(arr: [Int]) -> Int {
     var maxSoFar = Int.min
     var sum = 0
     
@@ -25,7 +40,7 @@ func sumOfLargestObjectsInArray(arr: [Int]) -> Int {
     return maxSoFar
 }
 
-print(sumOfLargestObjectsInArray(arr: [-2,1,-3,4,-1,2,1,-5,4]))
+print(largestSumInArray(arr: [-2,1,-3,4,-1,2,1,-5,4]))
 
 func countTopicOccurrences(topics: [String: [String]], reviews: [String]) -> [String: Int] {
     // TODO: COMPLETE ME
