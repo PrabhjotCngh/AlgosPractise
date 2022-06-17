@@ -105,7 +105,7 @@ for user in allUsers {
 
 //MARK: - Use of enums instead of subclassing
 
-//In Subclassing if one concrete(child) class do not required to implement any property/method from super(parent) class than it is not possible to do so. We need to make sure every inherting class should use property/methods from parent class
+//In Subclassing if one concrete(child) class do not need to implement any property/method from super(parent) class than it will voilate the inheritance. We need to make sure every inherting class should use each property/method from parent class
 /*
  class Ticket {
  
@@ -168,7 +168,7 @@ for user in allUsers {
  
  } */
 
-//Here we will use structs and enum instead of subclassing because in future we can introduce some properties in superclass which can not be shared by subclass we should use this approach.
+//Here we will use structs and enum instead of subclassing because in future we can introduce some properties in superclass which can not be shared by subclass so we should use this approach.
 //Though a lot of properties is repeating like departure, arrival in each struct but we are also defining individual struct with different responsibilities like Economy do not have meal but FirstClass do have it
 
 struct Economy {
@@ -237,7 +237,8 @@ class User {
     }
     
 }
-
+ 
+//Here we may not isFullTime property from parent class
 class Staff: User {
     
 }

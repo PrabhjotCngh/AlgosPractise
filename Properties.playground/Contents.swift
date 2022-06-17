@@ -65,8 +65,6 @@ let cart = Cart(items: items)
 //Computed property is accessed here
 print(cart.total)
 
-
-/*
 struct Workout {
     let startTime: Date
     let endTime: Date
@@ -82,7 +80,7 @@ let end = Date()
 
 let workout = Workout(startTime: start, endTime: end)
 workout.timeElapsed
- */
+ 
 
 //MARK: - Property Observers
 
